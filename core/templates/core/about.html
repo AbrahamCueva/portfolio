@@ -1,0 +1,128 @@
+{% extends 'core/base.html' %}
+{% block title %}{{ site_setting.site_name }} - Bio{% endblock %}
+{% block content %}
+
+<!-- Título de la página -->
+<section class="title-section text-left text-sm-center revealator-slideup revealator-once revealator-delay1">
+    <h1>SOBRE <span>MÍ</span></h1>
+    <span class="title-bg">Bio</span>
+</section>
+
+<!-- Contenido principal -->
+<section class="main-content revealator-slideup revealator-once revealator-delay1">
+    <div class="container">
+        <div class="row">
+            <!-- Información Personal -->
+            <div class="col-12 col-lg-5 col-xl-6">
+                <div class="row">
+                    <div class="col-12">
+                        <h3 class="text-uppercase custom-title mb-0 ft-wt-600">Información Personal</h3>
+                    </div>
+                    <div class="col-12 d-block d-sm-none">
+                        <img src="{{ about.foto.url }}" class="img-fluid main-img-mobile" alt="mi foto" />
+                    </div>
+                    <div class="col-6">
+                        <ul class="about-list list-unstyled open-sans-font">
+                            <li><span class="title">Nombre:</span> <span class="value">{{ about.nombre }}</span></li>
+                            <li><span class="title">Apellido:</span> <span class="value">{{ about.apellido }}</span></li>
+                            <li><span class="title">Edad:</span> <span class="value">{{ about.edad }} años</span></li>
+                            <li><span class="title">Nacionalidad:</span> <span class="value">{{ about.nacionalidad }}</span></li>
+                            <li><span class="title">Freelance:</span> <span class="value">{% if about.freelance %}Disponible{% else %}No disponible{% endif %}</span></li>
+                        </ul>
+                    </div>
+                    <div class="col-6">
+                        <ul class="about-list list-unstyled open-sans-font">
+                            <li><span class="title">Dirección:</span> <span class="value">{{ about.direccion }}</span></li>
+                            <li><span class="title">Teléfono:</span> <span class="value">{{ about.telefono }}</span></li>
+                            <li><span class="title">Email:</span> <span class="value">{{ about.email }}</span></li>
+                            <li><span class="title">Skype:</span> <span class="value">{{ about.skype }}</span></li>
+                            <li><span class="title">Idiomas:</span> <span class="value">{{ about.idiomas }}</span></li>
+                        </ul>
+                    </div>
+                    <div class="col-12 mt-3">
+                        {% if about.cv %}
+                            <a href="{{ about.cv.url }}" class="btn btn-download" target="_blank">Descargar CV</a>
+                        {% else %}
+                            <p><em>CV no disponible</em></p>
+                        {% endif %}
+                    </div>
+                    
+                </div>
+            </div>
+
+            <!-- Estadísticas -->
+            <div class="col-12 col-lg-7 col-xl-6 mt-5 mt-lg-0">
+                <div class="row">
+                    {% for stat in about.stats.all %}
+                    <div class="col-6">
+                        <div class="box-stats {% if forloop.counter < 3 %}with-margin{% endif %}">
+                            <h3 class="poppins-font position-relative">{{ stat.cantidad }}</h3>
+                            <p class="open-sans-font m-0 position-relative text-uppercase">{{ stat.descripcion }}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <hr class="separator">
+
+        <!-- Habilidades -->
+        <div class="row">
+            <div class="col-12">
+                <h3 class="text-uppercase pb-4 pb-sm-5 mb-3 mb-sm-0 text-left text-sm-center custom-title ft-wt-600">Mis Habilidades</h3>
+            </div>
+            {% for skill in about.skills.all %}
+            <div class="col-6 col-md-3 mb-3 mb-sm-5">
+                <div class="c100 p{{ skill.porcentaje|floatformat:0 }}">
+                    <span>{{ skill.porcentaje }}%</span>
+                    <div class="slice"><div class="bar"></div><div class="fill"></div></div>
+                </div>
+                <h6 class="text-uppercase open-sans-font text-center mt-2 mt-sm-4">{{ skill.nombre }}</h6>
+            </div>
+            {% endfor %}
+        </div>
+
+        <hr class="separator mt-1">
+
+        <!-- Experiencia y Educación -->
+        <div class="row">
+            <div class="col-12">
+                <h3 class="text-uppercase pb-5 mb-0 text-left text-sm-center custom-title ft-wt-600">Experiencia <span>&</span> Educación</h3>
+            </div>
+
+            <!-- Experiencia -->
+            <div class="col-lg-6 m-15px-tb">
+                <div class="resume-box">
+                    <ul>
+                        {% for exp in about.experiences.all %}
+                        <li>
+                            <div class="icon"><i class="fa fa-briefcase"></i></div>
+                            <span class="time open-sans-font text-uppercase">{{ exp.anio }}</span>
+                            <h5 class="poppins-font text-uppercase">{{ exp.titulo }} <span class="place open-sans-font">{{ exp.empresa }}</span></h5>
+                            <p class="open-sans-font">{{ exp.descripcion|safe }}</p>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Educación -->
+            <div class="col-lg-6 m-15px-tb">
+                <div class="resume-box">
+                    <ul>
+                        {% for edu in about.educations.all %}
+                        <li>
+                            <div class="icon"><i class="fa fa-graduation-cap"></i></div>
+                            <span class="time open-sans-font text-uppercase">{{ edu.anio }}</span>
+                            <h5 class="poppins-font text-uppercase">{{ edu.titulo }} <span class="place open-sans-font">{{ edu.institucion }}</span></h5>
+                            <p class="open-sans-font">{{ edu.descripcion|safe }}</p>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

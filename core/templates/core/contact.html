@@ -1,0 +1,124 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}{{ site_setting.site_name }} - Contacto{% endblock %}
+{% block content %}
+<section class="title-section text-left text-sm-center revealator-slideup revealator-once revealator-delay1">
+    <h1>contácta<span>me</span></h1>
+    <span class="title-bg">contacto</span>
+</section>
+<section class="main-content revealator-slideup revealator-once revealator-delay1">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-lg-4">
+                <p class="open-sans-font mb-3">{{ contacto.mensaje_intro|safe }}</p>
+                <p class="open-sans-font custom-span-contact position-relative">
+                    <i class="fa fa-envelope-open position-absolute"></i>
+                    <span class="d-block">Correo electrónico</span>{{ contacto.email }}
+                </p>
+                <p class="open-sans-font custom-span-contact position-relative">
+                    <i class="fa fa-phone-square position-absolute"></i>
+                    <span class="d-block">Teléfono</span>{{ contacto.telefono }}
+                </p>
+                <ul class="social list-unstyled pt-1 mb-5">
+                    {% if contacto.facebook %}
+                        <li class="facebook"><a title="Facebook" href="{{ contacto.facebook }}" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                    {% endif %}
+                    {% if contacto.twitter %}
+                        <li class="twitter"><a title="Twitter" href="{{ contacto.twitter }}" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                    {% endif %}
+                    {% if contacto.youtube %}
+                        <li class="youtube"><a title="Youtube" href="{{ contacto.youtube }}" target="_blank"><i class="fa fa-youtube"></i></a></li>
+                    {% endif %}
+                    {% if contacto.dribbble %}
+                        <li class="dribbble"><a title="Dribbble" href="{{ contacto.dribbble }}" target="_blank"><i class="fa fa-dribbble"></i></a></li>
+                    {% endif %}
+                </ul>
+            </div>
+            <div class="col-12 col-lg-8">
+                <form method="post" class="contactform" id="contactForm">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-12 col-md-4">
+                            {{ form.nombre }}
+                        </div>
+                        <div class="col-12 col-md-4">
+                            {{ form.email }}
+                        </div>
+                        <div class="col-12 col-md-4">
+                            {{ form.asunto }}
+                        </div>
+                        <div class="col-12 mb-3">
+                            {{ form.mensaje }}
+                        </div>
+                        <div class="col-12">
+                            <button type="button" class="btn btn-contact">Enviar Mensaje</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('contactForm');
+        const submitButton = form.querySelector('button[type="button"]'); // Selecciona el botón por su tipo
+
+        submitButton.addEventListener('click', function() { // Cambia 'submit' a 'click'
+            const formData = new FormData(form);
+
+            fetch('/contacto/', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    Swal.fire({
+                        toast: true,
+                        icon: 'success',
+                        title: '¡Mensaje Enviado!',
+                        text: 'Tu mensaje ha sido enviado. Pronto me pondré en contacto contigo.',
+                        confirmButtonText: 'Aceptar',
+                        position: "top",
+                        timer: 2000,
+                        timerProgressBar: true,
+                    }).then(() => {
+                        form.reset();
+                    });
+                } else {
+                    Swal.fire({
+                        toast: true,
+                        position: "top",
+                        timer: 2000,
+                        timerProgressBar: true,
+                        icon: 'error',
+                        title: '¡Error!',
+                        text: 'Hubo un problema al enviar tu mensaje. Por favor, intenta de nuevo.',
+                        confirmButtonText: 'Aceptar'
+                    });
+                    console.error('Error al enviar el mensaje:', data.error);
+                }
+            })
+            .catch(error => {
+                Swal.fire({
+                    toast: true,
+                    position: "top",
+                    timer: 2000,
+                    timerProgressBar: true,
+                    icon: 'error',
+                    title: '¡Error de Red!',
+                    text: 'Hubo un error de conexión. Por favor, intenta de nuevo más tarde.',
+                    confirmButtonText: 'Aceptar'
+                });
+                console.error('Error de red:', error);
+            });
+        });
+    });
+</script>
+{% endblock %}

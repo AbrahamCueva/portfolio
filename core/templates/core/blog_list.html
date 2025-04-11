@@ -1,0 +1,80 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}{{ site_setting.site_name }} - Blog{% endblock %}
+{% block content %}
+<section class="title-section text-left text-sm-center revealator-slideup revealator-once revealator-delay1">
+    <h1>mi <span>blog</span></h1>
+    <span class="title-bg">posts</span>
+</section>
+
+<section class="main-content revealator-slideup revealator-once revealator-delay1">
+    <div class="container">
+        <div class="row">
+            {% for post in page_obj %}
+            <div class="col-12 col-md-6 col-lg-6 col-xl-4 mb-30">
+                <article class="post-container">
+                    <div class="post-thumb">
+                        <a href="{% url 'blog_detail' slug=post.slug %}" class="d-block position-relative overflow-hidden">
+                            <img src="{{ post.image.url }}" style="width: 350px; height: 215px; object-fit: contain;" class="img-fluid" alt="{{ post.title }}">
+                        </a>
+                    </div>
+                    <div class="post-content">
+                        <div class="entry-header">
+                            <h3><a href="{% url 'blog_detail' slug=post.slug %}">{{ post.title }}</a></h3>
+                        </div>
+                        <div class="entry-content open-sans-font">
+                            <p>{{ post.description }}</p>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            {% endfor %}
+        </div>
+
+        {% if page_obj.has_other_pages %}
+            <div class="col-12 mt-4">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination justify-content-center mb-0">
+
+                        {% if page_obj.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Anterior">
+                                &laquo;
+                            </a>
+                        </li>
+                        {% else %}
+                        <li class="page-item disabled">
+                            <span class="page-link">&laquo;</span>
+                        </li>
+                        {% endif %}
+
+                        {% for num in page_obj.paginator.page_range %}
+                            {% if page_obj.number == num %}
+                                <li class="page-item active">
+                                    <span class="page-link">{{ num }}</span>
+                                </li>
+                            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                                <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if page_obj.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Siguiente">
+                                &raquo;
+                            </a>
+                        </li>
+                        {% else %}
+                        <li class="page-item disabled">
+                            <span class="page-link">&raquo;</span>
+                        </li>
+                        {% endif %}
+
+                    </ul>
+                </nav>
+            </div>
+        {% endif %}
+    </div>
+</section>
+
+{% endblock %}

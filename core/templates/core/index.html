@@ -1,0 +1,21 @@
+{% extends 'core/base.html' %}
+{% block title %}{{ site_setting.site_name }} - Inicio{% endblock %}
+{% block content %}
+
+<section class="container-fluid main-container container-home p-0 revealator-slideup revealator-once revealator-delay1">
+    <div class="color-block d-none d-lg-block"></div>
+    <div class="row home-details-container align-items-center">
+        <div class="col-lg-4 bg position-fixed d-none d-lg-block" style="background-image: url('{{ home.imagen.url }}'); background-size: cover;;"></div>
+        <div class="col-12 col-lg-8 offset-lg-4 home-details text-left text-sm-center text-lg-left">
+            <div>
+                <img src="{{ home.imagen.url }}" class="img-fluid main-img-mobile d-none d-sm-block d-lg-none" alt="mi foto" />
+                <h6 class="text-uppercase open-sans-font mb-0 d-block d-sm-none d-lg-block">{{ home.saludo }}</h6>
+                <h1 class="text-uppercase poppins-font"><span>Soy</span> {{ home.nombre }}</h1>
+                <div class="open-sans-font">{{ home.descripcion|safe }}</div>
+                <a href="{{ home.enlace_boton }}" class="btn btn-about">{{ home.texto_boton }}</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

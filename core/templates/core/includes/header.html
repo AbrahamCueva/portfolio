@@ -1,0 +1,71 @@
+<header class="header" id="navbar-collapse-toggle">
+    <ul class="icon-menu d-none d-lg-block">
+        <li class="icon-box {% if request.path == '/' %}active{% endif %}">
+            <i class="fa fa-home"></i>
+            <a href="{% url 'index' %}">
+                <h2>Inicio</h2>
+            </a>
+        </li>
+        <li class="icon-box {% if request.path == '/about/' %}active{% endif %}">
+            <i class="fa fa-user"></i>
+            <a href="{% url 'about' %}">
+                <h2>Bio</h2>
+            </a>
+        </li>
+        <li class="icon-box {% if request.path == '/portfolio/' %}active{% endif %}">
+            <i class="fa fa-briefcase"></i>
+            <a href="{% url 'portfolio' %}">
+                <h2>Portafolio</h2>
+            </a>
+        </li>
+        <li class="icon-box {% if request.path == '/contacto/' %}active{% endif %}">
+            <i class="fa fa-envelope-open"></i>
+            <a href="{% url 'contacto' %}">
+                <h2>Contacto</h2>
+            </a>
+        </li>
+        <li class="icon-box {% if request.path == '/blog_list/' %}active{% endif %}">
+            <i class="fa fa-comments"></i>
+            <a href="{% url 'blog_list' %}">
+                <h2>Blog</h2>
+            </a>
+        </li>
+    </ul>
+    <nav role="navigation" class="d-block d-lg-none">
+        <div id="menuToggle">
+            <input type="checkbox">
+            <span></span>
+            <span></span>
+            <span></span>
+            <ul class="list-unstyled" id="menu">
+                <li class="{% if request.path == '/' %}active{% endif %}">
+                    <a href="{% url 'index' %}"><i class="fa fa-home"></i><span>Inicio</span></a>
+                </li>
+                <li class="{% if request.path == '/about/' %}active{% endif %}">
+                    <a href="{% url 'about' %}">
+                        <i class="fa fa-user"></i>
+                        <span>Bio</span>
+                    </a>
+                </li>
+                <li class="{% if request.path == '/portfolio/' %}active{% endif %}">
+                    <a href="{% url 'portfolio' %}">
+                        <i class="fa fa-folder-open"></i>
+                        <span>Portafolio</span>
+                    </a>
+                </li>
+                <li class="{% if request.path == '/contacto/' %}active{% endif %}">
+                    <a href="{% url 'contacto' %}">
+                        <i class="fa fa-envelope-open"></i>
+                        <span>Contacto</span>
+                    </a>
+                </li>
+                <li class="{% if request.path == '/blog_list/' %}active{% endif %}">
+                    <a href="{% url 'blog_list' %}">
+                        <i class="fa fa-comments"></i>
+                        <span>Blog</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
