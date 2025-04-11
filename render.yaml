@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: portfolio
+    env: python
+    buildCommand: |
+      pip install --upgrade pip
+      pip install -r requirements.txt
+      python manage.py collectstatic --noinput
+    startCommand: gunicorn portfolio.wsgi:application
+    staticPublishPath: staticfiles
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: portfolio.settings
+      - key: PYTHON_VERSION
+        value: 3.11
