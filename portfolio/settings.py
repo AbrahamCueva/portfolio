@@ -33,7 +33,7 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 INSTALLED_APPS = [
-    'jazzmin',  
+    'jazzmin',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -133,32 +133,44 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+# Media files
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 JAZZMIN_SETTINGS = {
-    "icons": {
-        "core.auth": "fas fa-users",  # Icono para la app auth (usuarios)
-        "core.blog": "fas fa-blog",  # Icono para la app blog
-        "core.blogcategory": "fas fa-folder",  # Icono para la app blogcategory
-        "core.blogpost": "fas fa-blog",  # Icono para la app blogpost
-        "core.contactinfo": "fas fa-envelope",  # Icono para la app contactinfo
-        "core.homecontent": "fas fa-home",  # Icono para la app homecontent
-        "core.portfolio": "fas fa-laptop-code",  # Icono para la app portfolio
-        "core.skill": "fas fa-code",  # Icono para la app skill
-        "core.stat": "fas fa-chart-bar",  # Icono para la app stat
-        "core.experience": "fas fa-briefcase",  # Icono para la app experience
-        "core.education": "fas fa-graduation-cap",  # Icono para la app education
-        "core.aboutme": "fas fa-user",  # Icono para la app aboutme
-        "core.site": "fas fa-cogs",  # Icono para la app site
-        "core.sitesetting": "fas fa-cogs",  # Icono para la app sitesetting
-        "core.portfolioproject": "fas fa-laptop-code",  # Icono para la app portfolioproject
-        "core.mensajecontacto": "fas fa-envelope",  # Icono para la app mensajecontacto
+    "site_title": "Mi portfolio",
+    
+    "site_header": "Portfolio",
 
-        # También puedes agregar iconos para las acciones (si lo deseas)
-        "delete_selected": "fas fa-trash-alt",  # Icono para eliminar
-        "add": "fas fa-plus-circle",  # Icono para agregar
+    "site_brand": "Portfolio",
+    
+    "icons": {
+        "core.auth": "fas fa-users", 
+        "core.blog": "fas fa-blog",  
+        "core.blogcategory": "fas fa-folder", 
+        "core.blogpost": "fas fa-blog",  
+        "core.contactinfo": "fas fa-envelope", 
+        "core.homecontent": "fas fa-home", 
+        "core.portfolio": "fas fa-laptop-code",
+        "core.skill": "fas fa-code", 
+        "core.stat": "fas fa-chart-bar", 
+        "core.experience": "fas fa-briefcase", 
+        "core.education": "fas fa-graduation-cap",
+        "core.aboutme": "fas fa-user",
+        "core.site": "fas fa-cogs",  
+        "core.sitesetting": "fas fa-cogs", 
+        "core.portfolioproject": "fas fa-laptop-code", 
+        "core.mensajecontacto": "fas fa-envelope", 
+
+        "delete_selected": "fas fa-trash-alt",
+        "add": "fas fa-plus-circle",
+        
+        "auth.group": "fas fa-users-cog", 
+        "auth.user": "fas fa-user", 
     }
 }

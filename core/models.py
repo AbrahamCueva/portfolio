@@ -45,6 +45,8 @@ class Skill(models.Model):
     porcentaje = models.PositiveIntegerField()
     
     class Meta:
+        verbose_name = "Habilidad"
+        verbose_name_plural = "Habilidades"
 
     def __str__(self):
         return f"{self.nombre} - {self.porcentaje}%"
@@ -53,7 +55,11 @@ class Stat(models.Model):
     about = models.ForeignKey(AboutMe, on_delete=models.CASCADE, related_name='stats')
     titulo = models.CharField(max_length=100)
     cantidad = models.PositiveIntegerField()
-    descripcion = models.CharField(max_length=100)
+    descripcion = RichTextField()
+    
+    class Meta:
+        verbose_name = "Estadística"
+        verbose_name_plural = "Estadísticas"
 
     def __str__(self):
         return f"{self.titulo}: {self.cantidad}"
@@ -64,6 +70,10 @@ class Experience(models.Model):
     empresa = models.CharField(max_length=200)
     anio = models.CharField(max_length=100)
     descripcion = RichTextField()
+    
+    class Meta:
+        verbose_name = "Experiencia"
+        verbose_name_plural = "Experiencias"
 
     def __str__(self):
         return f"{self.titulo} - {self.empresa}"
@@ -74,6 +84,10 @@ class Education(models.Model):
     institucion = models.CharField(max_length=200)
     anio = models.CharField(max_length=100)
     descripcion = RichTextField()
+    
+    class Meta:
+        verbose_name = "Educación"
+        verbose_name_plural = "Educaciones"
 
     def __str__(self):
         return f"{self.titulo} - {self.institucion}"
@@ -84,7 +98,7 @@ class PortfolioProject(models.Model):
     lenguajes = models.CharField(max_length=200, verbose_name="Lenguajes/tecnologías")
     enlace = models.URLField(blank=True, null=True, verbose_name="Enlace del proyecto")
     imagen = models.ImageField(upload_to='portfolio/', verbose_name="Imagen destacada")
-    descripcion = models.TextField(verbose_name="Descripción del proyecto")
+    descripcion = RichTextField(verbose_name="Descripción del proyecto")
 
     class Meta:
         verbose_name = "Proyecto de Portafolio"
@@ -144,6 +158,10 @@ class BlogPost(models.Model):
     created_at = models.DateTimeField("Fecha de creación", auto_now_add=True)
     updated_at = models.DateTimeField("Última modificación", auto_now=True)
     author = models.CharField("Autor", max_length=100, default="admin")
+    
+    class Meta:
+        verbose_name = "Blog Post"
+        verbose_name_plural = "Blog Posts"
 
     def __str__(self):
         return self.title
