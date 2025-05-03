@@ -43,6 +43,8 @@ class Skill(models.Model):
     about = models.ForeignKey(AboutMe, on_delete=models.CASCADE, related_name='skills')
     nombre = models.CharField(max_length=100)
     porcentaje = models.PositiveIntegerField()
+    
+    class Meta:
 
     def __str__(self):
         return f"{self.nombre} - {self.porcentaje}%"
