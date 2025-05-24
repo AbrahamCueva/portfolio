@@ -143,6 +143,10 @@ class MensajeContacto(models.Model):
 
 class BlogCategory(models.Model):
     name = models.CharField("Nombre", max_length=100)
+    
+    class Meta:
+        verbose_name = "Categoría de blog"  
+        verbose_name_plural = "Categorías de blog"
 
     def __str__(self):
         return self.name
