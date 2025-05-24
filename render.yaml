@@ -12,4 +12,4 @@ services:
       - key: DJANGO_SETTINGS_MODULE
         value: portfolio.settings
       - key: PYTHON_VERSION
-        value: 3.11
+        value: 3.11.4  # Versión específica recomendada
